@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { BsPersonCircle } from 'react-icons/bs'; // Bootstrap icon for profile
-import { IoHome } from 'react-icons/io5'; // Bootstrap icon for Home
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faHome, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
   const [showProfile, setShowProfile] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [activePage, setActivePage] = useState('home');
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -13,108 +14,146 @@ const Dashboard = () => {
     permission: 'no',
   });
 
-  const containerStyle = {
-    display: 'flex',
-    width: '100%',
-    height: '100vh',
-    background: '#f9f9f9',
-    padding: '2rem',
-  };
+  const darkColor = '#1e1e2f';
 
-  const sidebarStyle = {
-    width: '250px',
-    background: '#333',
-    color: '#fff',
-    padding: '20px',
-    position: 'fixed',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-  };
-
-  const profileIconStyle = {
-    fontSize: '2rem',
-    cursor: 'pointer',
-    marginBottom: '20px',
-  };
-
-  const profileDropdownStyle = {
-    position: 'absolute',
-    top: '60px',
-    right: '20px',
-    backgroundColor: '#fff',
-    boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-    padding: '1rem',
-    borderRadius: '8px',
-    zIndex: 10,
-  };
-
-  const addButtonStyle = {
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '8px',
-    backgroundColor: '#000',
-    color: 'white',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    marginBottom: '20px',
-  };
-
-  const mainContentStyle = {
-    marginLeft: '250px',
-    width: 'calc(100% - 250px)',
-    padding: '2rem',
-    fontFamily: 'Arial, sans-serif',
-  };
-
-  const homeTabStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    marginTop: '20px',
-  };
-
-  const sectionStyle = {
-    padding: '1.5rem',
-    backgroundColor: 'white',
-    borderRadius: '10px',
-    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-    marginBottom: '20px',
-  };
-
-  const modalOverlayStyle = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100vw',
-    height: '100vh',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 20,
-  };
-
-  const modalStyle = {
-    backgroundColor: '#fff',
-    padding: '2rem',
-    borderRadius: '12px',
-    width: '400px',
-    boxShadow: '0 0 20px rgba(0,0,0,0.3)',
-  };
-
-  const inputStyle = {
-    width: '100%',
-    marginBottom: '1rem',
-    padding: '10px',
-    borderRadius: '8px',
-    border: '1px solid #ccc',
-  };
-
-  const toggleStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: '1rem',
+  const styles = {
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
+      height: '100vh',
+      fontFamily: 'Arial, sans-serif',
+    },
+    navbar: {
+      height: '60px',
+      backgroundColor: darkColor,
+      color: '#fff',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: '0 20px',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 100,
+    },
+    profileIcon: {
+      color: '#fff',
+      fontSize: '20px',
+      cursor: 'pointer',
+    },
+    profileDropdown: {
+      position: 'absolute',
+      top: '60px',
+      right: '20px',
+      backgroundColor: '#fff',
+      color: '#333',
+      padding: '1rem',
+      borderRadius: '8px',
+      boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+      zIndex: 10,
+      width: '200px',
+    },
+    sidebar: {
+      width: '250px',
+      background: darkColor,
+      color: '#fff',
+      paddingTop: '80px',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '20px',
+    },
+    sidebarButton: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: '12px 15px',
+      backgroundColor: '#333',
+      border: 'none',
+      borderRadius: '10px',
+      color: '#fff',
+      fontSize: '16px',
+      cursor: 'pointer',
+      margin: '0 20px',
+    },
+    iconStyle: {
+      marginRight: '10px',
+    },
+    main: {
+      marginLeft: '250px',
+      marginTop: '80px',
+      padding: '20px',
+      backgroundColor: '#f0f2f5',
+      height: 'calc(100vh - 80px)',
+      overflowY: 'auto',
+    },
+    postCard: {
+      backgroundColor: '#fff',
+      borderRadius: '12px',
+      padding: '20px',
+      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+      marginBottom: '20px',
+      borderLeft: '4px solid #007bff',
+    },
+    postTitle: {
+      margin: 0,
+      fontSize: '20px',
+      color: '#333',
+    },
+    postDescription: {
+      margin: '10px 0',
+      color: '#555',
+    },
+    postStack: {
+      fontSize: '14px',
+      color: '#007bff',
+      fontWeight: 'bold',
+    },
+    addButton: {
+      padding: '10px 20px',
+      border: 'none',
+      borderRadius: '8px',
+      backgroundColor: '#000',
+      color: 'white',
+      fontWeight: 'bold',
+      cursor: 'pointer',
+      marginBottom: '20px',
+    },
+    modalOverlay: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100vw',
+      height: '100vh',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 200,
+    },
+    modal: {
+      backgroundColor: '#fff',
+      padding: '2rem',
+      borderRadius: '12px',
+      width: '400px',
+      boxShadow: '0 0 20px rgba(0,0,0,0.3)',
+    },
+    input: {
+      width: '100%',
+      marginBottom: '1rem',
+      padding: '10px',
+      borderRadius: '8px',
+      border: '1px solid #ccc',
+    },
+    toggle: {
+      display: 'flex',
+      alignItems: 'center',
+      marginBottom: '1rem',
+    },
   };
 
   const handleFormChange = (e) => {
@@ -139,108 +178,123 @@ const Dashboard = () => {
   };
 
   return (
-    <div style={containerStyle}>
-      {/* Sidebar */}
-      <div style={sidebarStyle}>
-        {/* Profile Icon */}
+    <div style={styles.container}>
+      {/* Navbar */}
+      <div style={styles.navbar}>
+        <h3>Student Hub</h3>
         <div
-          style={profileIconStyle}
           onMouseEnter={() => setShowProfile(true)}
           onMouseLeave={() => setShowProfile(false)}
+          style={{ position: 'relative' }}
         >
-          <BsPersonCircle />
+          <FontAwesomeIcon icon={faUser} style={styles.profileIcon} />
           {showProfile && (
-            <div style={profileDropdownStyle}>
+            <div style={styles.profileDropdown}>
               <p style={{ marginBottom: '0.5rem' }}>user@example.com</p>
-              <button style={{ ...addButtonStyle, backgroundColor: '#e74c3c' }}>
+              <button style={{ ...styles.addButton, backgroundColor: '#e74c3c' }}>
                 Logout
               </button>
             </div>
           )}
         </div>
+      </div>
 
-        {/* Home Tab */}
-        <div style={addButtonStyle}>
-          <IoHome /> Home
-        </div>
+      {/* Sidebar */}
+      <div style={styles.sidebar}>
+        <button style={styles.sidebarButton} onClick={() => setActivePage('home')}>
+          <FontAwesomeIcon icon={faHome} style={styles.iconStyle} />
+          Home
+        </button>
+        <button
+          style={styles.sidebarButton}
+          onClick={() => {
+            setActivePage('add');
+            setShowModal(true);
+          }}
+        >
+          <FontAwesomeIcon icon={faPlus} style={styles.iconStyle} />
+          Add Project
+        </button>
       </div>
 
       {/* Main Content */}
-      <div style={mainContentStyle}>
-        {/* Add Project Button */}
-        <button onClick={() => setShowModal(true)} style={addButtonStyle}>
-          Add Project
-        </button>
-
-        {/* Modal */}
-        {showModal && (
-          <div style={modalOverlayStyle} onClick={() => setShowModal(false)}>
-            <div style={modalStyle} onClick={(e) => e.stopPropagation()}>
-              <h3>Add New Project</h3>
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Project Name"
-                  style={inputStyle}
-                  onChange={handleFormChange}
-                  required
-                />
-                <textarea
-                  name="description"
-                  placeholder="Project Description"
-                  style={{ ...inputStyle, height: '100px' }}
-                  onChange={handleFormChange}
-                  required
-                />
-                <input
-                  type="text"
-                  name="techStack"
-                  placeholder="Tech Stack (e.g., React, Node.js)"
-                  style={inputStyle}
-                  onChange={handleFormChange}
-                  required
-                />
-                <input
-                  type="file"
-                  name="codeFile"
-                  style={inputStyle}
-                  onChange={handleFormChange}
-                  required
-                />
-
-                {/* Permission Toggle */}
-                <div style={toggleStyle}>
-                  <label>Allow Download</label>
-                  <input
-                    type="checkbox"
-                    checked={formData.permission === 'yes'}
-                    onChange={handleToggleChange}
-                    style={{ marginLeft: '10px' }}
-                  />
-                  <span style={{ marginLeft: '10px' }}>
-                    {formData.permission === 'yes' ? 'Yes' : 'No'}
-                  </span>
-                </div>
-
-                <button type="submit" style={addButtonStyle}>
-                  Submit
-                </button>
-              </form>
+      <div style={styles.main}>
+        {activePage === 'home' && (
+          <>
+            <h2 style={{ color: '#333', marginBottom: '20px' }}>Recent Student Projects</h2>
+            <div style={styles.postCard}>
+              <h4 style={styles.postTitle}>College Women Safety App</h4>
+              <p style={styles.postDescription}>
+                A real-time emergency alert and location tracker app for students.
+              </p>
+              <p style={styles.postStack}>React Native, Node.js, MongoDB</p>
             </div>
-          </div>
+            <div style={styles.postCard}>
+              <h4 style={styles.postTitle}>Scan and Dine</h4>
+              <p style={styles.postDescription}>
+                QR-based restaurant menu app for touchless browsing and food orders.
+              </p>
+              <p style={styles.postStack}>React, Express, MongoDB</p>
+            </div>
+          </>
         )}
+      </div>
 
-        {/* Home Tab - Show other students' posts */}
-        <div style={homeTabStyle}>
-          <h3>Recent Student Projects</h3>
-          <div style={sectionStyle}>
-            <h4>Project Name</h4>
-            <p>Project description goes here...</p>
-            <p>Tech Stack: React, Node.js</p>
+      {/* Modal */}
+      {showModal && (
+        <div style={styles.modalOverlay} onClick={() => setShowModal(false)}>
+          <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <h3>Add New Project</h3>
+            <form onSubmit={handleFormSubmit}>
+              <input
+                type="text"
+                name="name"
+                placeholder="Project Name"
+                style={styles.input}
+                onChange={handleFormChange}
+                required
+              />
+              <textarea
+                name="description"
+                placeholder="Project Description"
+                style={{ ...styles.input, height: '100px' }}
+                onChange={handleFormChange}
+                required
+              />
+              <input
+                type="text"
+                name="techStack"
+                placeholder="Tech Stack (e.g., React, Node.js)"
+                style={styles.input}
+                onChange={handleFormChange}
+                required
+              />
+              <input
+                type="file"
+                name="codeFile"
+                style={styles.input}
+                onChange={handleFormChange}
+                required
+              />
+              <div style={styles.toggle}>
+                <label>Allow Download</label>
+                <input
+                  type="checkbox"
+                  checked={formData.permission === 'yes'}
+                  onChange={handleToggleChange}
+                  style={{ marginLeft: '10px' }}
+                />
+                <span style={{ marginLeft: '10px' }}>
+                  {formData.permission === 'yes' ? 'Yes' : 'No'}
+                </span>
+              </div>
+              <button type="submit" style={styles.addButton}>
+                Submit
+              </button>
+            </form>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
