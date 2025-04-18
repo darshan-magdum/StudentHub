@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faHome, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faHome, faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -13,6 +13,26 @@ const Dashboard = () => {
     codeFile: null,
     permission: 'no',
   });
+  const [projects, setProjects] = useState([
+    {
+      id: 1,
+      name: 'College Women Safety App',
+      description: 'A real-time emergency alert and location tracker app for students.',
+      techStack: 'React Native, Node.js, MongoDB',
+      uploadedBy: 'Mahesh Patil',
+      collegeName: 'XYZ University',
+      codeFile: 'path_to_file_1',
+    },
+    {
+      id: 2,
+      name: 'Scan and Dine',
+      description: 'QR-based restaurant menu app for touchless browsing and food orders.',
+      techStack: 'React, Express, MongoDB',
+      uploadedBy: 'Vedant Patil',
+      collegeName: 'ABC College',
+      codeFile: 'path_to_file_2',
+    },
+  ]);
 
   const darkColor = '#1e1e2f';
 
@@ -45,8 +65,8 @@ const Dashboard = () => {
     },
     profileDropdown: {
       position: 'absolute',
-      top: '60px',
-      right: '20px',
+      top: '30px',
+      right: '10px',
       backgroundColor: '#fff',
       color: '#333',
       padding: '1rem',
@@ -122,6 +142,7 @@ const Dashboard = () => {
       fontWeight: 'bold',
       cursor: 'pointer',
       marginBottom: '20px',
+      marginLeft:"25px"
     },
     modalOverlay: {
       position: 'fixed',
@@ -177,6 +198,15 @@ const Dashboard = () => {
     setShowModal(false);
   };
 
+  const handleDeleteProject = (id) => {
+    setProjects(projects.filter((project) => project.id !== id));
+  };
+
+  const handleDownload = (file) => {
+    // Here, you would implement the logic to download the project file
+    console.log('Downloading file:', file);
+  };
+
   return (
     <div style={styles.container}>
       {/* Navbar */}
@@ -215,6 +245,13 @@ const Dashboard = () => {
           <FontAwesomeIcon icon={faPlus} style={styles.iconStyle} />
           Add Project
         </button>
+        <button
+          style={styles.sidebarButton}
+          onClick={() => setActivePage('view')}
+        >
+          <FontAwesomeIcon icon={faEye} style={styles.iconStyle} />
+          View Projects
+        </button>
       </div>
 
       {/* Main Content */}
@@ -222,20 +259,54 @@ const Dashboard = () => {
         {activePage === 'home' && (
           <>
             <h2 style={{ color: '#333', marginBottom: '20px' }}>Recent Student Projects</h2>
-            <div style={styles.postCard}>
-              <h4 style={styles.postTitle}>College Women Safety App</h4>
-              <p style={styles.postDescription}>
-                A real-time emergency alert and location tracker app for students.
-              </p>
-              <p style={styles.postStack}>React Native, Node.js, MongoDB</p>
-            </div>
-            <div style={styles.postCard}>
-              <h4 style={styles.postTitle}>Scan and Dine</h4>
-              <p style={styles.postDescription}>
-                QR-based restaurant menu app for touchless browsing and food orders.
-              </p>
-              <p style={styles.postStack}>React, Express, MongoDB</p>
-            </div>
+            {projects.map((project) => (
+              <div key={project.id} style={styles.postCard}>
+                <h4 style={styles.postTitle}>{project.name}</h4>
+                <p style={styles.postDescription}>{project.description}</p>
+                <p style={styles.postStack}>{project.techStack}</p>
+                <p>
+                  Uploaded By: {project.uploadedBy} - {project.collegeName}
+                </p>
+                <button
+                  style={{ ...styles.addButton, backgroundColor: '#007bff' }}
+                  onClick={() => handleDownload(project.codeFile)}
+                >
+                  Download
+                </button>
+              </div>
+            ))}
+          </>
+        )}
+
+        {activePage === 'view' && (
+          <>
+            <h2 style={{ color: '#333', marginBottom: '20px' }}>Your Projects</h2>
+            {projects.map((project) => (
+              <div key={project.id} style={styles.postCard}>
+                <h4 style={styles.postTitle}>{project.name}</h4>
+                <p style={styles.postDescription}>{project.description}</p>
+                <p style={styles.postStack}>{project.techStack}</p>
+                <p>
+                  Uploaded By: {project.uploadedBy} - {project.collegeName}
+                </p>
+                <button
+                  style={{ ...styles.addButton, backgroundColor: '#007bff' }}
+                  onClick={() => handleDownload(project.codeFile)}
+                >
+                  Download
+                </button>
+                <button
+                  style={{
+                    ...styles.addButton,
+                    backgroundColor: '#e74c3c',
+                    marginTop: '10px',
+                  }}
+                  onClick={() => handleDeleteProject(project.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
           </>
         )}
       </div>
