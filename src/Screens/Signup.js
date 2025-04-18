@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import formImage from '../Images/formImage.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+     const navigate = useNavigate();
   const containerStyle = {
     width: '100%',
     height: '100vh',
@@ -64,7 +66,13 @@ const Signup = () => {
         <input type="password" placeholder="Password" style={inputStyle} />
         <input type="password" placeholder="Confirm Password" style={inputStyle} />
         <button type="submit" style={buttonStyle}>Register</button>
-        <Link to="/login" style={linkStyle}>Already have an account? Login</Link>
+       
+        <p style={{ marginTop: '1rem' }}>
+          Don't have an account?{' '}
+          <span onClick={() => navigate('/Login')} style={{ color: '#007bff', cursor: 'pointer' }}>
+            Sign Up
+          </span>
+        </p>
       </form>
     </div>
   );
