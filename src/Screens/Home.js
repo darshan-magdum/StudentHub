@@ -33,7 +33,7 @@ const Home = () => {
             <a href="#why-choose-us" className="nav-link text-white" style={{ cursor: 'pointer' }}>Why Choose Us</a>
             <a href="#contact" className="nav-link text-white" style={{ cursor: 'pointer' }}>Contact</a>
             <Link to="/login" className="btn btn-outline-light mx-2">Login</Link>
-            <Link to="/register" className="btn" style={{ backgroundColor: '#FF914D', color: 'white' }}>Sign Up</Link>
+            <Link to="/Signup" className="btn" style={{ backgroundColor: '#FF914D', color: 'white' }}>Sign Up</Link>
           </div>
         </div>
       </nav>
