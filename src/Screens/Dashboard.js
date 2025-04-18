@@ -13,6 +13,12 @@ const Dashboard = () => {
     codeFile: null,
     permission: 'no',
   });
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    window.location = "/";
+  };
   const [projects, setProjects] = useState([
     {
       id: 1,
@@ -221,7 +227,7 @@ const Dashboard = () => {
           {showProfile && (
             <div style={styles.profileDropdown}>
               <p style={{ marginBottom: '0.5rem' }}>user@example.com</p>
-              <button style={{ ...styles.addButton, backgroundColor: '#e74c3c' }}>
+              <button style={{ ...styles.addButton, backgroundColor: '#e74c3c' }} onClick={handleSignOut}>
                 Logout
               </button>
             </div>
