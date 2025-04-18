@@ -1,34 +1,26 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import formImage from '../Images/formImage.jpg';
 
 const Signup = () => {
-  const navigate = useNavigate();
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSignup = (e) => {
-    e.preventDefault();
-    // Add signup logic here
-    console.log('Signing up with:', form);
-    navigate('/home');
-  };
-
   const containerStyle = {
-    minHeight: '100vh',
+    width: '100%',
+    height: '100vh',
+    backgroundImage: `url(${formImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+    justifyContent: 'flex-start',
+    paddingLeft: '5%',
+    overflow: 'hidden',
   };
 
   const formStyle = {
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     padding: '2rem',
     borderRadius: '12px',
-    boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+    boxShadow: '0 0 10px rgba(0,0,0,0.2)',
     width: '300px',
     textAlign: 'center',
   };
@@ -37,7 +29,7 @@ const Signup = () => {
     width: '100%',
     padding: '10px',
     margin: '10px 0',
-    borderRadius: '8px',
+    borderRadius: '6px',
     border: '1px solid #ccc',
   };
 
@@ -46,47 +38,33 @@ const Signup = () => {
     padding: '10px',
     border: 'none',
     borderRadius: '8px',
-    backgroundColor: '#28a745',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
     color: 'white',
     fontWeight: 'bold',
     cursor: 'pointer',
+    marginTop: '15px',
+    backdropFilter: 'blur(2px)',
+  };
+
+  const linkStyle = {
+    marginTop: '15px',
+    display: 'block',
+    color: '#333',
+    textDecoration: 'none',
+    fontSize: '0.9rem',
   };
 
   return (
     <div style={containerStyle}>
-      <form style={formStyle} onSubmit={handleSignup}>
-        <h2>Sign Up</h2>
-        <input
-          style={inputStyle}
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          style={inputStyle}
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          style={inputStyle}
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
-        <button style={buttonStyle} type="submit">Sign Up</button>
-        <p style={{ marginTop: '1rem' }}>
-          Already have an account? <span onClick={() => navigate('/login')} style={{ color: '#007bff', cursor: 'pointer' }}>Login</span>
-        </p>
+      <form style={formStyle}>
+        <h2>Signup</h2>
+        <input type="text" placeholder="Name" style={inputStyle} />
+        <input type="email" placeholder="Email" style={inputStyle} />
+        <input type="text" placeholder="College Name" style={inputStyle} />
+        <input type="password" placeholder="Password" style={inputStyle} />
+        <input type="password" placeholder="Confirm Password" style={inputStyle} />
+        <button type="submit" style={buttonStyle}>Register</button>
+        <Link to="/login" style={linkStyle}>Already have an account? Login</Link>
       </form>
     </div>
   );

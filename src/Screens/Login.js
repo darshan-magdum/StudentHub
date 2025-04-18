@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import formImage from '../Images/formImage.jpg';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,27 +12,32 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Add actual authentication logic here
     console.log('Logging in with:', form);
     navigate('/home');
   };
 
   const containerStyle = {
-    minHeight: '100vh',
+    backgroundImage: `url(${formImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    height: '100vh',
+    width: '100vw',
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Aligns content to the left
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+    paddingLeft: '5%', // Optional: adds space from the left edge
   };
-
+  
   const formStyle = {
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     padding: '2rem',
     borderRadius: '12px',
-    boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+    boxShadow: '0 0 10px rgba(0,0,0,0.2)',
     width: '300px',
     textAlign: 'center',
   };
+  
 
   const inputStyle = {
     width: '100%',
@@ -40,17 +46,19 @@ const Login = () => {
     borderRadius: '8px',
     border: '1px solid #ccc',
   };
-
   const buttonStyle = {
     width: '100%',
     padding: '10px',
     border: 'none',
     borderRadius: '8px',
-    backgroundColor: '#007bff',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)', // Transparent black
     color: 'white',
     fontWeight: 'bold',
     cursor: 'pointer',
+    backdropFilter: 'blur(2px)', // Optional: adds a subtle blur behind
   };
+  
+  
 
   return (
     <div style={containerStyle}>
@@ -76,7 +84,10 @@ const Login = () => {
         />
         <button style={buttonStyle} type="submit">Login</button>
         <p style={{ marginTop: '1rem' }}>
-          Don't have an account? <span onClick={() => navigate('/signup')} style={{ color: '#007bff', cursor: 'pointer' }}>Sign Up</span>
+          Don't have an account?{' '}
+          <span onClick={() => navigate('/signup')} style={{ color: '#007bff', cursor: 'pointer' }}>
+            Sign Up
+          </span>
         </p>
       </form>
     </div>
