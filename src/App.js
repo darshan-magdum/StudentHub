@@ -3,6 +3,7 @@ import Intro from './Screens/Intro';
 import Home from "./Screens/Home";
 import Login from "./Screens/Login";
 import Signup from "./Screens/Signup";
+import Dashboard from "./Screens/Dashboard";
 // import UserDashboard from "./Screens/UserDashboard";
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
         <Route path="/Home" element={<Home />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Signup" element={<Signup />} />
-        {/* <Route path="/UserDashboard" element={<UserDashboard />} /> */}
+        <Route path="/Dashboard" element={<Dashboard />} />
  
       </Routes>
     </div>
