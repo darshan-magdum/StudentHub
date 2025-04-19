@@ -7,7 +7,13 @@ const UserNavbar = ({ handleSignOut }) => {
 
   return (
     <div style={styles.navbar}>
-      <h3>Student Hub</h3>
+    
+      <h3>
+  <i className="fa fa-graduation-cap" style={{ marginRight: '10px' }}></i>
+  Student Hub
+</h3>
+
+
       <div
         onMouseEnter={() => setShowProfile(true)}
         onMouseLeave={() => setShowProfile(false)}
