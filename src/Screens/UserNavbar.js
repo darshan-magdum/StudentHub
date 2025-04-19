@@ -17,12 +17,15 @@ const UserNavbar = ({ handleSignOut }) => {
         {showProfile && (
           <div style={styles.profileDropdown}>
             <p style={{ marginBottom: '0.5rem' }}>user@example.com</p>
+          
             <button
-              style={{ ...styles.addButton, backgroundColor: '#e74c3c' }}
-              onClick={handleSignOut}
-            >
-              Logout
-            </button>
+  style={{ ...styles.addButton, backgroundColor: '#e74c3c' }}
+  onClick={handleSignOut}
+>
+  <i className="fa fa-sign-out" style={{ marginRight: '8px' }}></i>
+  Logout
+</button>
+
           </div>
         )}
       </div>
