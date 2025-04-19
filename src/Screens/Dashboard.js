@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faHome, faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
+import UserSidebar from './UserSidebar';
 
 const Dashboard = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -236,7 +237,7 @@ const Dashboard = () => {
       </div>
 
       {/* Sidebar */}
-      <div style={styles.sidebar}>
+      {/* <div style={styles.sidebar}>
         <button style={styles.sidebarButton} onClick={() => setActivePage('home')}>
           <FontAwesomeIcon icon={faHome} style={styles.iconStyle} />
           Home
@@ -258,7 +259,13 @@ const Dashboard = () => {
           <FontAwesomeIcon icon={faEye} style={styles.iconStyle} />
           View Projects
         </button>
-      </div>
+      </div> */}
+      <UserSidebar
+  activePage={activePage}
+  setActivePage={setActivePage}
+  setShowModal={setShowModal}
+/>
+
 
       {/* Main Content */}
       <div style={styles.main}>
