@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faHome, faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 import UserSidebar from './UserSidebar';
+import UserNavbar from './UserNavbar';
 
 const Dashboard = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -217,7 +218,7 @@ const Dashboard = () => {
   return (
     <div style={styles.container}>
       {/* Navbar */}
-      <div style={styles.navbar}>
+      {/* <div style={styles.navbar}>
         <h3>Student Hub</h3>
         <div
           onMouseEnter={() => setShowProfile(true)}
@@ -234,32 +235,12 @@ const Dashboard = () => {
             </div>
           )}
         </div>
-      </div>
-
-      {/* Sidebar */}
-      {/* <div style={styles.sidebar}>
-        <button style={styles.sidebarButton} onClick={() => setActivePage('home')}>
-          <FontAwesomeIcon icon={faHome} style={styles.iconStyle} />
-          Home
-        </button>
-        <button
-          style={styles.sidebarButton}
-          onClick={() => {
-            setActivePage('add');
-            setShowModal(true);
-          }}
-        >
-          <FontAwesomeIcon icon={faPlus} style={styles.iconStyle} />
-          Add Project
-        </button>
-        <button
-          style={styles.sidebarButton}
-          onClick={() => setActivePage('view')}
-        >
-          <FontAwesomeIcon icon={faEye} style={styles.iconStyle} />
-          View Projects
-        </button>
       </div> */}
+
+
+<UserNavbar handleSignOut={handleSignOut} />
+      {/* Sidebar */}
+   
       <UserSidebar
   activePage={activePage}
   setActivePage={setActivePage}
